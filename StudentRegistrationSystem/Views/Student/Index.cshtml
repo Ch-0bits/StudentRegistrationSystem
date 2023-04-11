@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Index";
+}
+<partial name="_Notification"/>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Student List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Student" asp-action="NewStudentRegistration" class="btn btn-secondary">Enroll</a>
+        </div>
+    </div>
+</div>
+<table class="table table-hover  table-bordered" style="width:100%">
+    <thead>
+        <tr class="table-primary">
+            <th class="text-center">
+                Student ID
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Hobbies
+            </th>
+            <th class="text-center">
+                @*Edit*@
+            </th>
+            <th class="text-center">
+                @*Delete*@
+            </th>
+        </tr>
+    </thead>
+    @foreach(var obj in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @obj.StudentId
+            </td>
+            <td>
+                @obj.FName
+            </td>
+            <td>
+                @obj.LName
+            </td>
+            <td>
+                @if(DateTime.Now.Month < obj.DOB.Month)
+                {
+                    @(DateTime.Now.Year - obj.DOB.Year - 1)
+                }
+                else
+                {
+                    @(DateTime.Now.Year - obj.DOB.Year)
+                }
+                
+            </td>
+            <td>
+                @obj.Course
+            </td>
+            <td>
+                @{
+                    int counter = 0;
+                }
+                @foreach (var item in obj.objStdHob)
+                {
+                    counter++;
+                    @item.hobby.HobbyName@(' ')
+                    if (counter < obj.objStdHob.Count)
+                    {
+                        @(',')
+                    }
+                }
+            </td>
+            <td class="text-center">
+                <a asp-controller="Student" asp-action="Edit" asp-route-id="@obj.StudentId"
+               title="Edit" data-toggle="popover" data-trigger="hover" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i></a>
+            </td>
+            <td class="text-center">
+                <a asp-controller="Student" asp-action="Delete" asp-route-id="@obj.StudentId"
+               title="Delete" data-toggle="popover" data-trigger="hover"
+                onclick="return confirm('Are you sure?');"
+                class="btn btn-dark">
+                    <i class="bi bi-trash3"></i>
+                </a>
+                
+                                
+            </td>
+        </tr>
+    }
+    <tbody>
+
+    </tbody>
+
+</table>
+@*<footer class="border-top footer text-muted" align="center">
+
+    <div id="footer">
+        <ul class="pagination pagination-sm">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+*@

@@ -1,0 +1,84 @@
+﻿@model Student
+
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">New Registration</h2>
+        </div>
+        <hr />
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="FName">First Name</label>
+            <input asp-for="FName" class="form-control" placeholder="Max 32 characters"/>
+            <span asp-validation-for="FName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="LName">Last Name</label>
+            <input asp-for="LName" class="form-control" placeholder="Max 32 characters" />
+            <span asp-validation-for="LName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DOB">Date Of Birth:</label>
+            <br />
+            <input asp-for="DOB" type="date" max="@DateTime.Now" value="">
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Course" class="form-label mt-4">Course</label>
+            <select asp-for="Course" class="form-select" >
+                <option >Azure</option>
+                <option>AWS</option>
+                <option>GCP</option>                
+            </select>
+        </div>             
+                
+        <div class="mb-3">
+            <label asp-for="Hobbies" class="form-label mt-4">Hobbies</label>
+            @*<div id="hobbies" name="hobbies" class="custom-dropdown">
+                <div class="dropdown-header">
+                    <input type="checkbox" id="selectAll" />
+                    <label for="selectAll">Select All</label>
+                </div>
+                <ul class="dropdown-list">
+                    <li>
+                        <input type="checkbox" id="hobby1" name="hobby1" />
+                        <label for="hobby1">Hobby 1</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hobby2" name="hobby2" />
+                        <label for="hobby2">Hobby 2</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hobby3" name="hobby3" />
+                        <label for="hobby3">Hobby 3</label>
+                    </li>
+                </ul>
+            </div>
+*@
+            <select asp-for="Hobbies"
+                    title="ctrl+click to multi-select" data-toggle="popover" data-trigger="hover"
+            class="form-select" asp-items="Model.hobbiesList" multiple>
+
+            </select>
+            <span asp-validation-for="Hobbies" class="text-danger"></span>
+        </div>
+        <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-primary" style="width:150px">Submit</button>
+        <a asp-controller="Student" asp-action="Index" class="btn btn-outline-secondary"  style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@*to enable client side validation*@
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#Hobbies').multiselect({
+            includeSelectAllOption: true
+        });
+    });
+</script>
