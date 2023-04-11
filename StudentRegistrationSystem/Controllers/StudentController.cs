@@ -169,7 +169,7 @@ namespace StudentRegistrationSystem.Controllers
             }
             return View(obj);
         }
-        [HttpPost]
+        
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -181,26 +181,14 @@ namespace StudentRegistrationSystem.Controllers
             {
                 return NotFound();
             }
-            
-           return PartialView("_DeleteAlertPartialView", studentData);
-
-
-        }
-
-        [HttpPost]
-        public IActionResult Delete(Student studentData)
-        {
-
-            if (studentData == null)
-            {
-                return NotFound();
-            }
-            //TempData["confirmation"] = "Are you sure?";
-
             _db.Students.Remove(studentData);
             _db.SaveChanges();
             TempData["success"] = "Student Record Deleted Successfully";
             return RedirectToAction("Index");
+
+
         }
+
+        
     }
 }
