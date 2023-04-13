@@ -24,3 +24,21 @@ document.getElementById('hobbies').addEventListener('focusin', function () {
 document.getElementById('hobbies').addEventListener('focusout', function () {
     this.classList.remove('open');
 });
+
+//for date client side validation
+<script>
+    function validateDate() {
+        var dob = document.getElementById("DOB").value;
+    var dobDate = new Date(dob);
+    var currentDate = new Date();
+    var minDate = new Date(currentDate);
+    minDate.setFullYear(minDate.getFullYear() - 18); // 18 years ago from today
+
+        if (dobDate > minDate) {
+        alert("Date must be lower than 18 years from today.");
+    return false;
+        }
+
+    return true;
+    }
+</script>

@@ -39,7 +39,7 @@ namespace StudentRegistrationSystem.Controllers
         public IActionResult NewStudentRegistration(Student obj)
         {
             //custom validations
-            if (obj.FName.Length > 32)
+           /* if (obj.FName.Length > 32)
             {
                 ModelState.AddModelError("LengthExceeded", "Max 32 characters");
             }
@@ -63,9 +63,8 @@ namespace StudentRegistrationSystem.Controllers
             if (obj.DOB > DateTime.Now.AddYears(-18))
             {
                 ModelState.AddModelError("AgeError", "Age less than 18");
-            }
-            /*
-            */
+            }*/
+            
             if (ModelState.IsValid)
             {
                 foreach (var item in obj.Hobbies)
@@ -115,7 +114,7 @@ namespace StudentRegistrationSystem.Controllers
         {
             //custom validations
             if (obj.FName.Length > 32)
-            {
+         /*   {
                 ModelState.AddModelError("LengthExceeded", "Max 32 characters");
             }
             if (obj.LName.Length > 32)
@@ -139,7 +138,7 @@ namespace StudentRegistrationSystem.Controllers
             {
                 ModelState.AddModelError("AgeError", "Age less than 18");
             }
-
+         */
 
             if (ModelState.IsValid)
             {
@@ -167,6 +166,7 @@ namespace StudentRegistrationSystem.Controllers
                 TempData["success"] = "Student Record Updated Sucessfully";
                 return RedirectToAction("Index");
             }
+            
             return View(obj);
         }
         

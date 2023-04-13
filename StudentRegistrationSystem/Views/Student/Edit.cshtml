@@ -1,6 +1,8 @@
 ﻿@model Student
 
-<form method="post" asp-route-id = "@Model.StudentId">
+
+
+<form  method="post" asp-route-id="@Model.StudentId">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             
@@ -20,9 +22,9 @@
             <span asp-validation-for="LName" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="DOB">Date Of Birth:</label>
+            <label  asp-for="DOB">Date Of Birth:</label>
             <br />
-            <input asp-for="DOB" type="date" max="@DateTime.Now">
+            <input asp-for="DOB" type="date" >
             <span asp-validation-for="DOB" class="text-danger"></span>
         </div>
         <div class="mb-3">
@@ -59,3 +61,4 @@
         });
     })    ;
 </script>
+
