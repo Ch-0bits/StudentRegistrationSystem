@@ -81,6 +81,17 @@ namespace StudentRegistrationSystem.Controllers
                 TempData["success"] = "Student Record Created Sucessfully";
                 return RedirectToAction("Index");
             }
+            else
+            {
+                var hobby = _db.Hobbies.Select(u => new SelectListItem
+                {
+                    Text = u.HobbyName,
+                    Value = u.HobbyId.ToString()
+                }).ToList();
+                
+                obj.hobbiesList = hobby;
+
+            }
             return View(obj);
         }
 
@@ -113,8 +124,8 @@ namespace StudentRegistrationSystem.Controllers
         public IActionResult Edit(Student obj)
         {
             //custom validations
-            if (obj.FName.Length > 32)
-         /*   {
+         /*   if (obj.FName.Length > 32)
+            {
                 ModelState.AddModelError("LengthExceeded", "Max 32 characters");
             }
             if (obj.LName.Length > 32)
@@ -166,7 +177,18 @@ namespace StudentRegistrationSystem.Controllers
                 TempData["success"] = "Student Record Updated Sucessfully";
                 return RedirectToAction("Index");
             }
-            
+            else
+            {
+                var hobby = _db.Hobbies.Select(u => new SelectListItem
+                {
+                    Text = u.HobbyName,
+                    Value = u.HobbyId.ToString()
+                }).ToList();
+
+                obj.hobbiesList = hobby;
+
+            }
+
             return View(obj);
         }
         

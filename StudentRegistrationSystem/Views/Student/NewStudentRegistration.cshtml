@@ -8,6 +8,7 @@
         </div>
         <hr />
         <div asp-validation-summary="All"></div>
+        @*@Html.HiddenFor(m => m.hobbiesList)*@
         <div class="mb-3">
             <label asp-for="FName">First Name</label>
             <input asp-for="FName" class="form-control" placeholder="Max 32 characters"/>
